@@ -914,7 +914,41 @@ class Linkedlist {
     
     ////
     
-    
+    ////swap nodes in linkedlist
+    public Node swapNode(Node head,int k) {
+        if (head == null) {
+                return null;
+        }
+
+        if (k <= 0) {
+            return null;
+        }
+
+        Node slow = head,fast = head;
+        Node first = head,second = head;
+
+        for (int i = 0; i < k-1; i++) {
+            fast = fast.next;
+        }
+
+        first = fast;
+
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        second = slow;
+
+        int temp = first.data;
+        first.data = second.data;
+        second.data = temp;
+
+        return head;
+
+    }
+   
+    /////
     
     
     
