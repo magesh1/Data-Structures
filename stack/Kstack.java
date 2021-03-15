@@ -12,18 +12,20 @@ class Stackarr {
         arr = new int[n];
         top = new int[k];
         next = new int[n];
-
+        
+        // Initialize all stacks as empty 
         for (int i = 0; i < k; i++) {
             top[i] = -1;
         }
 
+        // Initialize all spaces as free 
         free = 0;
 
         for (int i = 0; i < n-1; i++) {
             next[i] = i+1;
         }
 
-        next[n-1] = -1;
+        next[n-1] = -1; // -1 is used to indicate end of free list
 
     }
 
@@ -37,11 +39,12 @@ class Stackarr {
             System.exit(1);
         }
 
-        int i = free;
-        free = next[i];
-        next[i] = top[stacknum];
+        int i = free; // Store index of first free slot
+        free = next[i];  // Update index of free slot to index of next slot in free list
+        next[i] = top[stacknum]; // Update next of top and then top for stack number 'stacknumber'
         top[stacknum] = i;
 
+        // Put the item in array 
         arr[i] = item;
     }
 
@@ -50,13 +53,16 @@ class Stackarr {
             System.out.println("stack underflow");
             System.exit(1);
         }
-
+        
+        // Find index of top item in stack number 'sn'
         int i = top[stacknum];
-        top[stacknum] = next[i];
+        // Change top to store next of previous top
+        top[stacknum] = next[i];     
+        // Attach the previous top to the beginning of free list 
         next[i] = free;
         free = i;
 
-        return arr[i];
+        return arr[i]; // Return the previous top item
     }
 
     public boolean isEmpty(int stacknum) {
@@ -72,10 +78,12 @@ class Stackarr {
 public class Kstack {
 
     public static void main(String[] args) {
+        
+        //create 3 stack with 10 numbers
         int k = 3,n = 10;
-
+ 
         Stackarr arr = new Stackarr(k,n);
-
+        
         arr.push(11,0);
         arr.push(9,0);
         arr.push(12,0);
