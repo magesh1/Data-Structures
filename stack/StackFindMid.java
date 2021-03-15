@@ -18,13 +18,17 @@ class StackCreate {
 
         new_node.prev = null;
         new_node.next = stack.head;
+        /* Increment count of items in stack */
         stack.count += 1;
 
+        /* Change mid pointer in two cases
+           1) Linked List is empty
+           2) Number of nodes in linked list is odd */
         if (stack.count == 1) {
             stack.mid = new_node;
         } else {
             stack.head.prev = new_node;
-            if(stack.count % 2 != 0) {
+            if(stack.count % 2 != 0) {       // Update mid if stack->count is odd
                 stack.mid = stack.mid.prev;
             }
         }
@@ -42,13 +46,17 @@ class StackCreate {
         Dll head = stack.head;
         int item = head.data;
         stack.head = head.next;
-
+        
+         // If linked list doesn't become empty, update prev
+        // of new head as NULL
         if (stack.head != null) {
             stack.head.prev = null;
         }
 
         stack.count -= 1;
-
+        
+        // update the mid pointer when we have even number of
+        // elements in the stack, i,e move down the mid pointer.
         if(stack.count % 2 == 0) {
             stack.mid = stack.mid.next;
         }
